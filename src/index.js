@@ -1,19 +1,31 @@
 const express = require("express");
-
-//Initialize Express as an instance named "app".
+// Initialize Express as an instance named "app".
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+// Separate these out in case we wanna use Docker or something to wrap the app.
+const PORT = 3000;
 const HOST = "0.0.0.0";
 
+// Best settings for setting up Express as an API server to receive and process JSON & form data.
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// We can receive JSON data from POST/ PUT/ PATCH/ etc requests
+// Standard ExpressJS route, sends back a HTML response
 app.get("/", (request, response) => {
-  response.json({ message: "Hellooooo" });
-  //   Same as above but for form data
+  response.send("Hello world!");
 });
 
+// API route, sends back a JSON response
+app.get("/json", (request, response) => {
+  response.json({ message: "Hello world!" });
+});
+
+// Run the server by making it 'listen' for network traffic
 app.listen(PORT, HOST, () => {
-  console.log("Server is running");
+  // Weird in-line conditional string interpolation to handle "0.0.0.0" -> "localhost" conversion
+  console.log(
+    `Hello world app listening at http://${
+      HOST == "0.0.0.0" && "localhost"
+    }:${PORT}/`
+  );
 });
