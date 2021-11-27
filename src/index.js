@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // We can receive JSON data from POST/ PUT/ PATCH/ etc requests
 app.get("/", (request, response) => {
-  response.json();
+  response.json({ message: "Hellooooo" });
   //   Same as above but for form data
 });
 
