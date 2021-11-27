@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 // Separate these out in case we wanna use Docker or something to wrap the app.
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const HOST = "0.0.0.0";
 
 // Best settings for setting up Express as an API server to receive and process JSON & form data.
