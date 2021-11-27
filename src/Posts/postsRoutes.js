@@ -1,9 +1,20 @@
 const express = require("express");
+const {
+  randomNumberGenerator,
+  someAsyncFunction,
+} = require("./postsFunctions");
 
 const routes = express.Router();
 
 routes.get("/", (request, response) => {
   response.json(`Received a request on ${request.originalUrl}`);
+});
+
+routes.get("/randomNumber", async (request, response) => {
+  let asyncResult = await someAsyncFunction();
+
+  //response.send(randomNumberGenerator().toString());
+  response.send(`<h1> ${randomNumberGenerator()}</h1>`);
 });
 
 // Set up route params with the colon before the name.
