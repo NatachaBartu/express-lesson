@@ -16,16 +16,17 @@ app.get("/", (request, response) => {
 });
 
 // API route, sends back a JSON response
-app.get("/json", (request, response) => {
+app.get("/", (request, response) => {
   response.json({ message: "Hello world!" });
 });
+const importedPostRouting = require("./Posts/postsRoutes.js");
+app.use("/posts", importedPostRouting);
 
 // Run the server by making it 'listen' for network traffic
 app.listen(PORT, HOST, () => {
   // Weird in-line conditional string interpolation to handle "0.0.0.0" -> "localhost" conversion
-  console.log(
-    `Hello world app listening at http://${
-      HOST == "0.0.0.0" && "localhost"
-    }:${PORT}/`
-  );
+  console.log();
+  // `Hello world app listening at http://${
+  //   HOST == "0.0.0.0" && "localhost"
+  // }:${PORT}/`
 });
